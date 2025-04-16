@@ -4,6 +4,7 @@ using EaseShop.Domain.Entities;
 using EaseShop.Infrastructure;
 using EaseShop.Persistance;
 using EaseShop.Persistance.Data;
+using EaseShop.Persistance.SeedDatas;
 using Hangfire;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
@@ -17,14 +18,13 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var config = builder.Configuration;
-var baseAdminUrl = config["ApiSettings:BaseAdminUrl"];
-var clientSideUrl=config["ApiSettings:ClientSideUrl"];
 builder.Services.RegisterServices(config);
 builder.Services.AddPersistenceServices(config);
 builder.Services.AddInfrastructureServices(config);
 builder.Services.ApplicationServices(config);
 builder.Services.AddHttpClient();
 var app = builder.Build();
+await RoleSeed.SeedAsync(app.Services);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -32,6 +32,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.RegisterRoutes(config);
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

@@ -1,8 +1,10 @@
+using EaseShop.Application.Behaviours;
 using EaseShop.Application.Features.Categories.Commands.CreateCategory;
 using EaseShop.Application.Validators.CategoryValidators;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Hangfire;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -25,6 +27,7 @@ public static class RegisterApplicationServices
         {
             cfg.RegisterServicesFromAssembly(typeof(CreateCategoryHandler).Assembly);
         });
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(FluentValidationBehavior<,>));
         services.AddResponseCompression(opt =>
         {
             opt.EnableForHttps = true;
