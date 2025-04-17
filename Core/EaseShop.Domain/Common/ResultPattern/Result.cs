@@ -22,7 +22,7 @@ public class Result<T>
     }
     public List<string> Errors { get; private set; }
  
-    public static Result<T> Success(T data,SuccessReturnType successReturnType) => new(true,null, data,null,successReturnType);
+    public static Result<T> Success(T data,SuccessReturnType? successReturnType) => new(true,null, data,null,successReturnType);
     public static Result<T> Failure(Error error, List<string> errors, ErrorType errorType) => new(false, error, default, errorType, null , errors);
 
     public static Result<TOut> FailureResult<TIn, TOut>(Result<TIn> result)

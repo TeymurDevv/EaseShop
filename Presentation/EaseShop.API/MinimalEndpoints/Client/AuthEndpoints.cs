@@ -1,7 +1,7 @@
 using EaseShop.API.Extensions;
 using EaseShop.Application.Dtos.Auth;
+using EaseShop.Application.Features.Auth.Commands.AppUserLogin;
 using EaseShop.Application.Features.Auth.Commands.AppUserRegister;
-using FluentValidation;
 using MediatR;
 
 namespace EaseShop.API.MinimalEndpoints.Client;
@@ -12,7 +12,7 @@ public static class AuthEndpoints
     {
         app.MapPost($"{baseUrl}Auth/Register", async (
                 AppUserRegisterDto appUserRegisterDto,
-                ISender _sender) =>
+                ISender sender) =>
             {
                 AppUserRegisterCommand appUserRegisterCommand = new();
                 appUserRegisterCommand.UserName = appUserRegisterDto.UserName;
@@ -21,9 +21,21 @@ public static class AuthEndpoints
                 appUserRegisterCommand.Email = appUserRegisterDto.Email;
                 appUserRegisterCommand.Password = appUserRegisterDto.Password;
                 appUserRegisterCommand.RePassword = appUserRegisterDto.RePassword;
-                var result = await _sender.Send(appUserRegisterCommand);
+                var result = await sender.Send(appUserRegisterCommand);
                 return result.ToApiResult();
             })
-            .WithTags("RegisterUser");
+            .WithTags("Auth");
+        
+        app.MapPost($"{baseUrl}Auth/Login", async (
+                AuthUserLoginDto authUserLoginDto,
+                ISender sender) =>
+            {
+                AppUserLoginCommand appUserLoginCommand = new();
+                appUserLoginCommand.UserName = authUserLoginDto.UserName;
+                appUserLoginCommand.Password = authUserLoginDto.Password;
+                var result = await sender.Send(appUserLoginCommand);
+                return result.ToApiResult();
+            })
+            .WithTags("Auth");
     }
 }

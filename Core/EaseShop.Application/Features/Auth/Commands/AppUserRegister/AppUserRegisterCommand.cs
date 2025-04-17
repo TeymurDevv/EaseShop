@@ -16,7 +16,7 @@ public record AppUserRegisterCommand : IRequest<Result<Unit>>
 
 
 
-public static class AppUserMappingExtensions
+public static class AppUserRegisterMappingExtensions
 {
     public static AppUser ToEntity(this AppUserRegisterCommand command)
     {
