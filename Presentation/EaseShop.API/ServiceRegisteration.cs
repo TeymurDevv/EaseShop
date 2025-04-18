@@ -40,13 +40,13 @@ public static class ServiceRegisteration
             });
             services.AddSwaggerGen(c =>
             {
+                
                 c.MapType<TimeSpan>(() => new Microsoft.OpenApi.Models.OpenApiSchema
                 {
                     Type = "string",
                     Example = new Microsoft.OpenApi.Any.OpenApiString("00:00:00") // Default example for TimeSpan
                 });
-
-                // Other Swagger configuration (e.g., c.SwaggerDoc)
+                
             });
 
             services.AddControllersWithViews()

@@ -1,3 +1,4 @@
+using EaseShop.API.MinimalEndpoints.Admin;
 using EaseShop.API.MinimalEndpoints.Client;
 
 namespace EaseShop.API;
@@ -9,5 +10,6 @@ public static class RouteRegisterar
         var baseAdminUrl = configuration["ApiSettings:BaseAdminUrl"];
         var clientSideUrl=configuration["ApiSettings:ClientSideUrl"];
         app.MapAuthClientEndpoints(clientSideUrl);
+        app.MapCategoryAdminEndpoints(baseAdminUrl);
     }
 }

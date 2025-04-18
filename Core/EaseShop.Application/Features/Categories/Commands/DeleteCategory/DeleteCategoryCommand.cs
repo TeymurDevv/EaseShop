@@ -1,0 +1,9 @@
+using EaseShop.Domain.Common.ResultPattern;
+using MediatR;
+
+namespace EaseShop.Application.Features.Categories.Commands.DeleteCategory;
+
+public record class DeleteCategoryCommand : IRequest<Result<Unit>>
+{ 
+    public Guid? Id { get; set; }
+}

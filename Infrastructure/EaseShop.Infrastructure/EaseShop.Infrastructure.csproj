@@ -14,14 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\..\Core\EaseShop.Application\EaseShop.Application.csproj" />
     </ItemGroup>
-
-
-
-
 
 </Project>

@@ -10,7 +10,6 @@
 
     <ItemGroup>
       <Folder Include="App\Client\" />
-      <Folder Include="MinimalEndpoints\Admin\" />
     </ItemGroup>
 
 
