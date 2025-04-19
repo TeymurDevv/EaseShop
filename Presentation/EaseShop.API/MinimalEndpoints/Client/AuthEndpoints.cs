@@ -14,13 +14,7 @@ public static class AuthEndpoints
                 AppUserRegisterDto appUserRegisterDto,
                 ISender sender) =>
             {
-                AppUserRegisterCommand appUserRegisterCommand = new();
-                appUserRegisterCommand.UserName = appUserRegisterDto.UserName;
-                appUserRegisterCommand.FirstName = appUserRegisterDto.FirstName;
-                appUserRegisterCommand.LastName = appUserRegisterDto.LastName;
-                appUserRegisterCommand.Email = appUserRegisterDto.Email;
-                appUserRegisterCommand.Password = appUserRegisterDto.Password;
-                appUserRegisterCommand.RePassword = appUserRegisterDto.RePassword;
+                AppUserRegisterCommand appUserRegisterCommand = new(appUserRegisterDto.UserName, appUserRegisterDto.FirstName, appUserRegisterDto.LastName, appUserRegisterDto.Email, appUserRegisterDto.Password, appUserRegisterDto.RePassword);
                 var result = await sender.Send(appUserRegisterCommand);
                 return result.ToApiResult();
             })
@@ -30,9 +24,7 @@ public static class AuthEndpoints
                 AuthUserLoginDto authUserLoginDto,
                 ISender sender) =>
             {
-                AppUserLoginCommand appUserLoginCommand = new();
-                appUserLoginCommand.UserName = authUserLoginDto.UserName;
-                appUserLoginCommand.Password = authUserLoginDto.Password;
+                AppUserLoginCommand appUserLoginCommand = new(authUserLoginDto.UserName, authUserLoginDto.Password);
                 var result = await sender.Send(appUserLoginCommand);
                 return result.ToApiResult();
             })

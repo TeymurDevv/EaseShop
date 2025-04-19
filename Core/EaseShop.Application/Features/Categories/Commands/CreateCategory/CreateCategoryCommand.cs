@@ -4,9 +4,9 @@ using MediatR;
 
 namespace EaseShop.Application.Features.Categories.Commands.CreateCategory;
 
-public record CreateCategoryCommand : IRequest<Result<Unit>>
+public record CreateCategoryCommand(string name) : IRequest<Result<Unit>>
 {
-    public string? Name { get; set; }
+    public string? Name { get; set; } = name;
 }
 
 public static class CategoryCreateMappingExtensions

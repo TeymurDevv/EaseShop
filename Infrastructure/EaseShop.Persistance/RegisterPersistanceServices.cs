@@ -61,6 +61,8 @@ namespace EaseShop.Persistance
 
             services.AddScoped<IAppUserResolver, AppUserResolver>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ISubCategoryRepository, SubCategoryRepository>();
         }
     }
 }

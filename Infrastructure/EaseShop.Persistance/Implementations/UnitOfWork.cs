@@ -10,10 +10,12 @@ namespace EaseShop.Persistance.Implementations;
         private bool _disposed;
 
         public ICategoryRepository CategoryRepository { get; private set; }
+        public ISubCategoryRepository SubCategoryRepository { get; private set; }
 
         public UnitOfWork(EaseDbContext applicationDbContext)
         {
             CategoryRepository = new CategoryRepository(applicationDbContext);
+            SubCategoryRepository = new SubCategoryRepository(applicationDbContext);
 
             _applicationDbContext = applicationDbContext;
 

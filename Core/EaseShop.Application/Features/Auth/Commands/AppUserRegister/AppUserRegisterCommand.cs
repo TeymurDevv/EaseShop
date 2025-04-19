@@ -4,14 +4,14 @@ using MediatR;
 
 namespace EaseShop.Application.Features.Auth.Commands.AppUserRegister;
 
-public record AppUserRegisterCommand : IRequest<Result<Unit>>
+public record AppUserRegisterCommand(string userName, string firstName, string lastName, string email, string password, string rePassword) : IRequest<Result<Unit>>
 {
-    public string? UserName { get; set; }
-    public string? FirstName { get; set; }
-    public string? LastName { get; set; }
-    public string? Email { get; set; }
-    public string? Password { get; set; }
-    public string? RePassword { get; set; }
+    public string? UserName { get; set; } = userName;
+    public string? FirstName { get; set; } = firstName;
+    public string? LastName { get; set; } = lastName;
+    public string? Email { get; set; } = email;
+    public string? Password { get; set; } = password;
+    public string? RePassword { get; set; } = rePassword;
 }
 
 
