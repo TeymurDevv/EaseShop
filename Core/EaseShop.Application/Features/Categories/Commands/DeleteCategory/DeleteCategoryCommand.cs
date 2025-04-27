@@ -3,7 +3,7 @@ using MediatR;
 
 namespace EaseShop.Application.Features.Categories.Commands.DeleteCategory;
 
-public record class DeleteCategoryCommand(Guid id) : IRequest<Result<Unit>>
+public record class DeleteCategoryCommand(int id) : IRequest<Result<Unit>>
 {
-    public Guid? Id { get; set; } = id;
+    public int Id { get; set; } = id;
 }

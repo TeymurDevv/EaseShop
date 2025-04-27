@@ -11,5 +11,6 @@ public static class RouteRegisterar
         var clientSideUrl=configuration["ApiSettings:ClientSideUrl"];
         app.MapAuthClientEndpoints(clientSideUrl);
         app.MapCategoryAdminEndpoints(baseAdminUrl);
+        app.MapSubCategoryAdminEndpoints(baseAdminUrl);
     }
 }

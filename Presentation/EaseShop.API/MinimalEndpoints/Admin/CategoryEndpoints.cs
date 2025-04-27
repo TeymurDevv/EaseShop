@@ -21,8 +21,8 @@ public static class CategoryEndpoints
             })
             .WithTags("Category");
         
-            app.MapDelete($"{baseUrl}/Category", async (
-                    Guid id,
+            app.MapDelete($"{baseUrl}/Category/{{id:int}}", async (
+                    int id,
                     ISender sender) =>
                 {
                     DeleteCategoryCommand deleteCategoryCommand = new(id);
@@ -31,11 +31,11 @@ public static class CategoryEndpoints
                 })
                 .WithTags("Category");
             
-            app.MapPut($"{baseUrl}/Category", async (
+            app.MapPut($"{baseUrl}/Category/{{id:int}}", async (
                     CategoryUpdateDto CategoryUpdateDto,
-                    ISender sender) =>
+                    ISender sender, int id) =>
                 {
-                    UpdateCategoryCommand updateCategoryCommand = new(CategoryUpdateDto.Id,CategoryUpdateDto.Name);
+                    UpdateCategoryCommand updateCategoryCommand = new(id,CategoryUpdateDto.Name);
                     var result = await sender.Send(updateCategoryCommand);
                     return result.ToApiResult();
                 })

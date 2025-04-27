@@ -18,7 +18,7 @@ public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryComman
     {
         var isExist =  await _unitOfWork.CategoryRepository.isExists(c=>c.Id == request.Id);
         if(!isExist)
-            return Result<Unit>.Failure(Error.Custom("NotExists","Category with this id does not exists."), null,ErrorType.NotFoundError);
+            return Result<Unit>.Failure(Error.NotFound, null, ErrorType.NotFoundError);
         Category existCategory = await _unitOfWork.CategoryRepository.GetEntity(c=>c.Id == request.Id);
         await _unitOfWork.CategoryRepository.Delete(existCategory);
         await _unitOfWork.SaveChangesAsync(cancellationToken);

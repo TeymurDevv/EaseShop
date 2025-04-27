@@ -1,39 +1,36 @@
 using EaseShop.API.Common;
 using EaseShop.API.Extensions;
-using EaseShop.Application.Dtos.Category;
-using EaseShop.Application.Features.Categories.Queries.GetAllCategories;
-using EaseShop.Application.Features.Categories.Queries.GetCategoryById;
-using EaseShop.Domain.Common.ResultPattern;
+using EaseShop.Application.Features.SubCategories.Queries.GetAllSubCategories;
+using EaseShop.Application.Features.SubCategories.Queries.GetSubCategoryById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EaseShop.API.App.Client;
 
-public class CategoryController : BaseController
+public class SubCategoryController : BaseController
 {
-    private readonly ISender _sender;
+    private readonly ISender  _sender;
 
-    public CategoryController(ISender sender)
+    public SubCategoryController(ISender sender)
     {
         _sender = sender;
     }
-
+    
     [HttpGet]
     [Route("{id}")]
     public async Task<IResult> Get(int id)
     {
-        GetCategoryByIdQuery  query = new GetCategoryByIdQuery(id);
-        var result = await _sender.Send(query);
-        return result.ToApiResult();
-    }
-
-    [HttpGet]
-    [Route("")]
-    public async Task<IResult> GetAll(int pageNumber, int pageSize = 20)
-    {
-        GetAllCategoriesQuery query = new GetAllCategoriesQuery(pageNumber, pageSize);
+        GetSubCategoryByIdQuery  query = new GetSubCategoryByIdQuery(id);
         var result = await _sender.Send(query);
         return result.ToApiResult();
     }
     
+    [HttpGet]
+    [Route("")]
+    public async Task<IResult> GetAll(int pageNumber, int pageSize = 20)
+    {
+        GetAllSubCategoriesQuery query = new GetAllSubCategoriesQuery(pageNumber, pageSize);
+        var result = await _sender.Send(query);
+        return result.ToApiResult();
+    }
 }

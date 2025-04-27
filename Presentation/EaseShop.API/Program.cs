@@ -1,4 +1,5 @@
 using EaseShop.API;
+using EaseShop.API.Middlewares;
 using EaseShop.Application;
 using EaseShop.Domain.Entities;
 using EaseShop.Infrastructure;
@@ -6,6 +7,7 @@ using EaseShop.Persistance;
 using EaseShop.Persistance.Data;
 using EaseShop.Persistance.SeedDatas;
 using Hangfire;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -53,6 +55,7 @@ app.MapControllers();
 
 app.UseHttpsRedirection();
 app.MapControllers();
+app.UseMiddleware<CustomExceptionMiddleware>();
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;

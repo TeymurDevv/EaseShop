@@ -20,8 +20,8 @@ public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryComman
             return Result<Unit>.Failure(Error.NotFound, null, ErrorType.NotFoundError);
         var existCategoryWithName = await _unitOfWork.CategoryRepository.GetEntity(c => c.Name == request.Name && c.Id != request.Id);
         if (existCategoryWithName is not null)
-            return Result<Unit>.Failure(Error.NotFound, null, ErrorType.NotFoundError);
-        if (string.IsNullOrWhiteSpace(existCategory.Name))
+            return Result<Unit>.Failure(Error.DuplicateConflict, null, ErrorType.ValidationError);
+        if (!string.IsNullOrWhiteSpace(request.Name))
             existCategory.Name = request.Name ?? existCategory.Name;
         await _unitOfWork.CategoryRepository.Update(existCategory);
         await _unitOfWork.SaveChangesAsync(cancellationToken);

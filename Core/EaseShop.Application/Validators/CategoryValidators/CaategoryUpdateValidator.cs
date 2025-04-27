@@ -7,14 +7,6 @@ public class CaategoryUpdateValidator : AbstractValidator<CategoryUpdateDto>
 {
     public CaategoryUpdateValidator()
     {
-        RuleFor(p=>p.Id)
-            .NotEmpty()
-            .WithMessage("Id is required.");
-        RuleFor(p => p.Id)
-            .NotEqual(Guid.Empty);
-        RuleFor(p=>p.Id)
-            .NotNull()
-            .WithMessage("Id is required.");
         RuleFor(x => x.Name)
             .NotEmpty()
             .WithMessage("Name is required.");

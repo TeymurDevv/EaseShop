@@ -37,5 +37,6 @@ public static class RegisterApplicationServices
             opt.Providers.Add<GzipCompressionProvider>();
         });
         services.Configure<JwtSettings>(configuration.GetSection("Jwt"));
-        services.AddSingleton(sp => sp.GetRequiredService<IOptions<JwtSettings>>().Value);    }
+        services.AddSingleton(sp => sp.GetRequiredService<IOptions<JwtSettings>>().Value); 
+    }
 }

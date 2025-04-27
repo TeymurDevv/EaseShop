@@ -16,9 +16,9 @@ public sealed class CreateCategoryHandler : IRequestHandler<CreateCategoryComman
 
     public async Task<Result<Unit>> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
     {
-        var isExist = await _unitOfWork.CategoryRepository.isExists(c=>c.Name == request.Name);
+        var isExist = await _unitOfWork.CategoryRepository.isExists(c=>c.Name.ToLower() == request.Name.ToLower());
         if(isExist)
-            return Result<Unit>.Failure(Error.Custom("AlreadyExists","Category with this name already exists."), null,ErrorType.ValidationError);
+            return Result<Unit>.Failure(Error.DuplicateConflict,null,ErrorType.ValidationError);
         Category newCategory = request.ToEntity();
         await _unitOfWork.CategoryRepository.Create(newCategory);
         await _unitOfWork.SaveChangesAsync(cancellationToken);

@@ -25,7 +25,7 @@ public class GetAllCategoriesQueryHandler : IRequestHandler<GetAllCategoriesQuer
         }).ToList();
         var response = new PagedResponse<CategoryListItemDto>();
         response.Data = categoryListItemDtos;
-        response.TotalCount = categories.Count();
+        response.TotalCount = categories.Count;
         response.PageSize = request.PageSize;
         response.CurrentPage = request.PageNumber;
         return Result<PagedResponse<CategoryListItemDto>>.Success(response, null);

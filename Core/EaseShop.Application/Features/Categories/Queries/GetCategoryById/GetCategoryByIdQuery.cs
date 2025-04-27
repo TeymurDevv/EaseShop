@@ -4,7 +4,7 @@ using MediatR;
 
 namespace EaseShop.Application.Features.Categories.Queries.GetCategoryById;
 
-public class GetCategoryByIdQuery(Guid id) : IRequest<Result<CategoryReturnDto>>
+public class GetCategoryByIdQuery(int id) : IRequest<Result<CategoryReturnDto>>
 {
-    public Guid Id { get; set; } = id;
+    public int Id { get; set; } = id;
 }
