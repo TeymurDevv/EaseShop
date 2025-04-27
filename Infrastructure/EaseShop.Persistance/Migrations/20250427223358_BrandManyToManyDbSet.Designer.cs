@@ -4,6 +4,7 @@ using EaseShop.Persistance.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EaseShop.Persistance.Migrations
 {
     [DbContext(typeof(EaseDbContext))]
-    partial class EaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250427223358_BrandManyToManyDbSet")]
+    partial class BrandManyToManyDbSet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
