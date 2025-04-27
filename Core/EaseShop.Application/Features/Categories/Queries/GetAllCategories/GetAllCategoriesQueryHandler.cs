@@ -17,7 +17,11 @@ public class GetAllCategoriesQueryHandler : IRequestHandler<GetAllCategoriesQuer
 
     public async Task<Result<PagedResponse<CategoryListItemDto>>> Handle(GetAllCategoriesQuery request, CancellationToken cancellationToken)
     {
-        var categories = await _unitOfWork.CategoryRepository.GetAll();
+        var categories = await _unitOfWork.CategoryRepository.GetAll(
+                includes: query => query
+                    .Skip((request.PageNumber - 1) * request.PageSize)
+                    .Take(request.PageSize)
+            );
         var categoryListItemDtos = categories.Select(c => new CategoryListItemDto
         {
             Id = c.Id,

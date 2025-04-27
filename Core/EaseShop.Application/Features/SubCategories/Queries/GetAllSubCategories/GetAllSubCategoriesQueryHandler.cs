@@ -17,8 +17,11 @@ public class GetAllSubCategoriesQueryHandler : IRequestHandler<GetAllSubCategori
 
     public async Task<Result<PagedResponse<SubCategoryListItemDto>>> Handle(GetAllSubCategoriesQuery request, CancellationToken cancellationToken)
     {
-        var subCategories = await _unitOfWork.SubCategoryRepository
-            .GetAll();
+        var subCategories = await _unitOfWork.SubCategoryRepository.GetAll(
+            includes: query => query
+                .Skip((request.PageNumber - 1) * request.PageSize)
+                .Take(request.PageSize)
+        );
         var subCategoryListItemDtos = subCategories.Select(c => new SubCategoryListItemDto
         {
             Id = c.Id,
