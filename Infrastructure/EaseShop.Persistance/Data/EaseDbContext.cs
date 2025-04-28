@@ -1,7 +1,5 @@
 using System.Reflection;
 using EaseShop.Domain.Entities;
-using EaseShop.Persistance.Configurations;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
